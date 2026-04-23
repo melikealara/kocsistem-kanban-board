@@ -2,8 +2,12 @@ function nowId(prefix) {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
 }
 
-const defaultUserId = "user-demo"
+const defaultUserId = "user-melike"
 const defaultBoardId = "board-demo"
+const defaultAudit = {
+  name: "Melike Alara",
+  at: new Date().toISOString(),
+}
 
 export const initialAppState = {
   session: {
@@ -13,7 +17,8 @@ export const initialAppState = {
   users: {
     [defaultUserId]: {
       id: defaultUserId,
-      name: "Demo User",
+      name: "Melike Alara",
+      email: "melike@kocsistem.com",
       boardIds: [defaultBoardId],
     },
   },
@@ -22,6 +27,7 @@ export const initialAppState = {
       id: defaultBoardId,
       userId: defaultUserId,
       title: "KocSistem Internship Board",
+      isPublic: true,
       columns: {
         "col-todo": { id: "col-todo", boardId: defaultBoardId, title: "To Do", order_index: 0 },
         "col-doing": { id: "col-doing", boardId: defaultBoardId, title: "In Progress", order_index: 1 },
@@ -36,6 +42,9 @@ export const initialAppState = {
           title: "React setup",
           description: "Temel proje yapisini tamamla",
           priority: "high",
+          createdBy: defaultAudit,
+          updatedBy: defaultAudit,
+          history: [],
         },
         "card-2": {
           id: "card-2",
@@ -45,6 +54,9 @@ export const initialAppState = {
           title: "dnd-kit integration",
           description: "Surukle birak akisini kur",
           priority: "medium",
+          createdBy: defaultAudit,
+          updatedBy: defaultAudit,
+          history: [],
         },
         "card-3": {
           id: "card-3",
@@ -54,22 +66,26 @@ export const initialAppState = {
           title: "Persistence",
           description: "localStorage kaliciligini test et",
           priority: "high",
+          createdBy: defaultAudit,
+          updatedBy: defaultAudit,
+          history: [],
         },
       },
     },
   },
 }
 
-export function createUser(name) {
+export function createUser({ name, email }) {
   const id = nowId("user")
   return {
     id,
     name: name.trim(),
+    email: email.trim().toLowerCase(),
     boardIds: [],
   }
 }
 
-export function createBoard(userId, title) {
+export function createBoard(userId, title, isPublic = false) {
   const id = nowId("board")
   const columns = {
     "todo-default": { id: "todo-default", boardId: id, title: "To Do", order_index: 0 },
@@ -81,6 +97,7 @@ export function createBoard(userId, title) {
     id,
     userId,
     title: title.trim(),
+    isPublic,
     columns,
     cards: {},
   }
