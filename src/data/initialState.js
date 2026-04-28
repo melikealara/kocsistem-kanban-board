@@ -18,7 +18,7 @@ export const initialAppState = {
     [defaultUserId]: {
       id: defaultUserId,
       name: "Melike Alara",
-      email: "melike@kocsistem.com",
+      email: "melikealara@gmail.com",
       boardIds: [defaultBoardId],
     },
   },

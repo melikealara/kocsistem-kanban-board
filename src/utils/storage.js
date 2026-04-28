@@ -5,7 +5,7 @@ const defaultAuthUsers = [
   {
     id: "user-melike",
     name: "Melike Alara",
-    email: "melike@kocsistem.com",
+    email: "melikealara@gmail.com",
     password: "123456",
   },
 ]

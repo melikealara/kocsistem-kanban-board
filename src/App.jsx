@@ -145,7 +145,6 @@ function App() {
           </h1>
           <p className="mt-1 text-sm text-slate-600">Use email and password authentication.</p>
           <p className="mt-2 rounded bg-slate-100 px-2 py-1 text-xs text-slate-600">
-            Demo: melike@kocsistem.com / 123456
           </p>
           {authMode === "signup" ? (
             <input

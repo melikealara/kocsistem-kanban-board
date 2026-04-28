@@ -5,6 +5,7 @@ import {
   KeyboardSensor,
   PointerSensor,
   closestCorners,
+  TouchSensor, 
   useSensor,
   useSensors,
 } from "@dnd-kit/core"
@@ -35,9 +36,20 @@ function Board({ board, onBoardChange, currentUserName, canEdit }) {
   const [newColumnTitle, setNewColumnTitle] = useState("")
 
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
-  )
+    useSensor(PointerSensor, { 
+      activationConstraint: { distance: 8 } 
+    }),
+    useSensor(TouchSensor, {
+      // Tablet kalemi ve parmak için hayat kurtaran ayar:
+      activationConstraint: {
+        delay: 250,    // 250ms basılı tutunca sürükleme başlar (sayfa kaydırmayı bozmaz)
+        tolerance: 5,  // Beklerken parmağın 5px kaymasını tolere eder
+      },
+    }),
+    useSensor(KeyboardSensor, { 
+      coordinateGetter: sortableKeyboardCoordinates 
+    }),
+  );
 
   const columns = useMemo(() => getColumns(board), [board])
   const activeCard = activeCardId ? board.cards[activeCardId] : null
