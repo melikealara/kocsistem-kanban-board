@@ -150,7 +150,7 @@ function Card({ card, onDelete, onUpdate, canEdit = true, isOverlay = false }) {
 
       {isViewModalOpen ? (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4">
-          <div className="w-full max-w-2xl rounded-2xl bg-white p-5 shadow-2xl">
+          <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-semibold text-slate-800">Card Details</h3>
               <button
@@ -188,15 +188,17 @@ function Card({ card, onDelete, onUpdate, canEdit = true, isOverlay = false }) {
 
             <div className="mt-4 rounded-lg border border-slate-200 bg-white p-3 text-xs text-slate-600">
               <p className="font-semibold text-slate-700">Status Change History</p>
-              {card.history?.length ? (
-                <ul className="mt-2 list-disc space-y-1 pl-5">
-                  {card.history.map((entry, index) => (
-                    <li key={`${card.id}-history-${index}`}>{entry}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="mt-2">No movement history yet.</p>
-              )}
+              <div className="mt-2 max-h-32 overflow-y-auto pr-2">
+                {card.history?.length ? (
+                  <ul className="list-disc space-y-1 pl-5">
+                    {card.history.map((entry, index) => (
+                      <li key={`${card.id}-history-${index}`}>{entry}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No movement history yet.</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
