@@ -52,6 +52,7 @@ function Column({
               type="button"
               {...attributes}
               {...listeners}
+              style={{ touchAction: "none" }}
               className="rounded border border-slate-300 p-1 text-slate-500 hover:border-[#999999]"
               aria-label="Drag column"
             >

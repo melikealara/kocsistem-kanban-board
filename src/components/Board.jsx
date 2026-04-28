@@ -88,10 +88,11 @@ function Board({ board, onBoardChange, currentUserName, canEdit }) {
       return
     }
 
-    if (activeType === "column" && activeColumnId) {
-      const overId = String(event?.over?.id ?? "")
-      if (overId && board.columns[overId]) {
-        updateBoard((current) => moveColumn(current, activeColumnId, overId))
+    if (activeType === "column" && activeColumnId && event?.over) {
+      const overData = event.over.data.current;
+      const targetColumnId = overData?.type === "column" ? event.over.id : overData?.columnId;
+      if (targetColumnId && activeColumnId !== targetColumnId) {
+        updateBoard((current) => moveColumn(current, activeColumnId, targetColumnId));
       }
     }
 
