@@ -90,7 +90,17 @@ function Board({ board, onBoardChange, currentUserName, canEdit }) {
 
     if (activeType === "column" && activeColumnId && event?.over) {
       const overData = event.over.data.current;
-      const targetColumnId = overData?.type === "column" ? event.over.id : overData?.columnId;
+      let targetColumnId = null;
+
+
+      if (overData?.type === "column") {
+        targetColumnId = event.over.id;
+      } 
+
+      else if (overData?.type === "card" || overData?.type === "dropzone") {
+        targetColumnId = overData?.columnId || overData?.column_id; 
+      }
+
       if (targetColumnId && activeColumnId !== targetColumnId) {
         updateBoard((current) => moveColumn(current, activeColumnId, targetColumnId));
       }
