@@ -139,6 +139,7 @@ function Card({ card, onDelete, onUpdate, canEdit = true, isOverlay = false }) {
             role="button"
             tabIndex={0}
             aria-label={`Drag ${card.title}`}
+            style={{ touchAction: "none" }}
             className="inline-flex cursor-grab items-center gap-1 rounded border border-slate-200 px-2 py-1 text-[11px] text-[#999999] hover:border-[#999999]"
           >
             <GripVertical size={12} />
